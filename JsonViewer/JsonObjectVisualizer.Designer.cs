@@ -1,6 +1,6 @@
 namespace EPocalipse.Json.Viewer
 {
-    partial class NodeVisualizer
+    partial class JsonObjectVisualizer
     {
         /// <summary> 
         /// Required designer variable.
@@ -38,17 +38,17 @@ namespace EPocalipse.Json.Viewer
             this.pgJsonObject.Location = new System.Drawing.Point(0, 0);
             this.pgJsonObject.Name = "pgJsonObject";
             this.pgJsonObject.PropertySort = System.Windows.Forms.PropertySort.Alphabetical;
-            this.pgJsonObject.Size = new System.Drawing.Size(297, 480);
+            this.pgJsonObject.Size = new System.Drawing.Size(304, 467);
             this.pgJsonObject.TabIndex = 4;
             this.pgJsonObject.ToolbarVisible = false;
             // 
-            // NodeVisualizer
+            // JsonObjectVisualizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pgJsonObject);
-            this.Name = "NodeVisualizer";
-            this.Size = new System.Drawing.Size(297, 480);
+            this.Name = "JsonObjectVisualizer";
+            this.Size = new System.Drawing.Size(304, 467);
             this.ResumeLayout(false);
 
         }

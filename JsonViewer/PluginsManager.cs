@@ -11,7 +11,7 @@ namespace EPocalipse.Json.Viewer
     class PluginsManager
     {
         List<IJsonViewerPlugin> plugins = new List<IJsonViewerPlugin>();
-        List<IJsonTextVisualizer> textVisualizers = new List<IJsonTextVisualizer>();
+        List<ICustomTextProvider> textVisualizers = new List<ICustomTextProvider>();
         List<IJsonVisualizer> visualizers = new List<IJsonVisualizer>();
         IJsonVisualizer _defaultVisualizer;
 
@@ -40,8 +40,8 @@ namespace EPocalipse.Json.Viewer
                             {
                                 IJsonViewerPlugin plugin = (IJsonViewerPlugin)Activator.CreateInstance(pluginType);
                                 plugins.Add(plugin);
-                                if (plugin is IJsonTextVisualizer)
-                                    textVisualizers.Add((IJsonTextVisualizer)plugin);
+                                if (plugin is ICustomTextProvider)
+                                    textVisualizers.Add((ICustomTextProvider)plugin);
                                 if (plugin is IJsonVisualizer)
                                 {
                                     if (_defaultVisualizer == null)
@@ -59,7 +59,7 @@ namespace EPocalipse.Json.Viewer
             }
         }
 
-        public IEnumerable<IJsonTextVisualizer> TextVisualizers
+        public IEnumerable<ICustomTextProvider> TextVisualizers
         {
             get
             {

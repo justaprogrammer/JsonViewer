@@ -5,14 +5,14 @@ using System.ComponentModel;
 
 namespace EPocalipse.Json.Viewer
 {
-    class JsonTreeNodeTypeDescriptor : ICustomTypeDescriptor
+    class JsonTreeObjectTypeDescriptor : ICustomTypeDescriptor
     {
-        JsonTreeNode _node;
+        JsonObject _jsonObject;
         PropertyDescriptorCollection _propertyCollection;
 
-        public JsonTreeNodeTypeDescriptor(JsonTreeNode node)
+        public JsonTreeObjectTypeDescriptor(JsonObject jsonObject)
         {
-            _node = node;
+            _jsonObject = jsonObject;
             InitPropertyCollection();
         }
 
@@ -20,9 +20,9 @@ namespace EPocalipse.Json.Viewer
         {
             List<PropertyDescriptor> propertyDescriptors = new List<PropertyDescriptor>();
 
-            foreach (JsonTreeNode childNode in _node.Nodes)
+            foreach (JsonObject field in _jsonObject.Fields)
             {
-                PropertyDescriptor pd = new JsonTreeNodePropertyDescriptor(childNode);
+                PropertyDescriptor pd = new JsonTreeObjectPropertyDescriptor(field);
                 propertyDescriptors.Add(pd);
             }
             _propertyCollection = new PropertyDescriptorCollection(propertyDescriptors.ToArray());
@@ -30,27 +30,27 @@ namespace EPocalipse.Json.Viewer
 
         AttributeCollection ICustomTypeDescriptor.GetAttributes()
         {
-            return TypeDescriptor.GetAttributes(_node, true);
+            return TypeDescriptor.GetAttributes(_jsonObject, true);
         }
 
         string ICustomTypeDescriptor.GetClassName()
         {
-            return TypeDescriptor.GetClassName(_node, true);
+            return TypeDescriptor.GetClassName(_jsonObject, true);
         }
 
         string ICustomTypeDescriptor.GetComponentName()
         {
-            return TypeDescriptor.GetComponentName(_node, true);
+            return TypeDescriptor.GetComponentName(_jsonObject, true);
         }
 
         TypeConverter ICustomTypeDescriptor.GetConverter()
         {
-            return TypeDescriptor.GetConverter(_node, true);
+            return TypeDescriptor.GetConverter(_jsonObject, true);
         }
 
         EventDescriptor ICustomTypeDescriptor.GetDefaultEvent()
         {
-            return TypeDescriptor.GetDefaultEvent(_node, true);
+            return TypeDescriptor.GetDefaultEvent(_jsonObject, true);
         }
 
         PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty()
@@ -60,7 +60,7 @@ namespace EPocalipse.Json.Viewer
 
         object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
         {
-            return TypeDescriptor.GetEditor(_node, editorBaseType, true);
+            return TypeDescriptor.GetEditor(_jsonObject, editorBaseType, true);
         }
 
         EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes)
@@ -70,7 +70,7 @@ namespace EPocalipse.Json.Viewer
 
         EventDescriptorCollection ICustomTypeDescriptor.GetEvents()
         {
-            return TypeDescriptor.GetEvents(_node, true);
+            return TypeDescriptor.GetEvents(_jsonObject, true);
         }
 
         PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
@@ -85,31 +85,31 @@ namespace EPocalipse.Json.Viewer
 
         object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd)
         {
-            return _node;
+            return _jsonObject;
         }
     }
 
-    class JsonTreeNodePropertyDescriptor : PropertyDescriptor
+    class JsonTreeObjectPropertyDescriptor : PropertyDescriptor
     {
-        JsonTreeNode _node;
-        JsonTreeNodeTypeDescriptor[] _nodes;
+        JsonObject _jsonObject;
+        JsonTreeObjectTypeDescriptor[] _jsonObjects;
 
-        public JsonTreeNodePropertyDescriptor(JsonTreeNode node)
-            : base(node.Id, null)
+        public JsonTreeObjectPropertyDescriptor(JsonObject jsonObject)
+            : base(jsonObject.Id, null)
         {
-            _node = node;
-            if (_node.JsonType == JsonType.Array)
-                InitNodes();
+            _jsonObject = jsonObject;
+            if (_jsonObject.JsonType == JsonType.Array)
+                InitJsonObject();
         }
 
-        private void InitNodes()
+        private void InitJsonObject()
         {
-            List<JsonTreeNodeTypeDescriptor> nodeList = new List<JsonTreeNodeTypeDescriptor>();
-            foreach (JsonTreeNode child in _node.Nodes)
+            List<JsonTreeObjectTypeDescriptor> jsonObjectList = new List<JsonTreeObjectTypeDescriptor>();
+            foreach (JsonObject field in _jsonObject.Fields)
             {
-                nodeList.Add(new JsonTreeNodeTypeDescriptor(child));
+                jsonObjectList.Add(new JsonTreeObjectTypeDescriptor(field));
             }
-            _nodes = nodeList.ToArray();
+            _jsonObjects = jsonObjectList.ToArray();
         }
 
         public override bool CanResetValue(object component)
@@ -127,14 +127,14 @@ namespace EPocalipse.Json.Viewer
 
         public override object GetValue(object component)
         {
-            switch (_node.JsonType)
+            switch (_jsonObject.JsonType)
             {
                 case JsonType.Array:
-                    return _nodes;
+                    return _jsonObjects;
                 case JsonType.Object:
-                    return _node;
+                    return _jsonObject;
                 default:
-                    return _node.Value;
+                    return _jsonObject.Value;
             }
         }
 
@@ -150,14 +150,14 @@ namespace EPocalipse.Json.Viewer
         {
             get
             {
-                switch (_node.JsonType)
+                switch (_jsonObject.JsonType)
                 {
                     case JsonType.Array:
                         return typeof(object[]);
                     case JsonType.Object:
-                        return typeof(JsonTreeNode);
+                        return typeof(JsonObject);
                     default:
-                        return _node.Value == null ? typeof(string) : _node.Value.GetType();
+                        return _jsonObject.Value == null ? typeof(string) : _jsonObject.Value.GetType();
                 }
             }
         }
@@ -169,7 +169,7 @@ namespace EPocalipse.Json.Viewer
 
         public override void SetValue(object component, object value)
         {
-            //_node.Value = value;
+            //TODO: Implement?
         }
 
         public override bool ShouldSerializeValue(object component)

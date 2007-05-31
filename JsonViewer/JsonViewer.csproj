@@ -52,23 +52,23 @@
     </Compile>
     <Compile Include="ViewerConfiguration.cs" />
     <Compile Include="IJsonViewerPlugin.cs" />
-    <Compile Include="JsonTree.cs">
+    <Compile Include="JsonObjectTree.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="JsonTreeNode.cs" />
-    <Compile Include="JsonTreeNodes.cs" />
-    <Compile Include="JsonTreeNodeTypeDescriptor.cs" />
+    <Compile Include="JsonObject.cs" />
+    <Compile Include="JsonFields.cs" />
+    <Compile Include="JsonTreeObjectTypeDescriptor.cs" />
     <Compile Include="JsonViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="JsonViewer.Designer.cs">
       <DependentUpon>JsonViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="NodeVisualizer.cs">
+    <Compile Include="JsonObjectVisualizer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NodeVisualizer.Designer.cs">
-      <DependentUpon>NodeVisualizer.cs</DependentUpon>
+    <Compile Include="JsonObjectVisualizer.Designer.cs">
+      <DependentUpon>JsonObjectVisualizer.cs</DependentUpon>
     </Compile>
     <Compile Include="PluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,9 +80,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>JsonViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NodeVisualizer.resx">
+    <EmbeddedResource Include="JsonObjectVisualizer.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>NodeVisualizer.cs</DependentUpon>
+      <DependentUpon>JsonObjectVisualizer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>

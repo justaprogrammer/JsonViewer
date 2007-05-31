@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace EPocalipse.Json.Viewer
 {
-    public partial class NodeVisualizer : UserControl, IJsonVisualizer
+    public partial class JsonObjectVisualizer : UserControl, IJsonVisualizer
     {
-        public NodeVisualizer()
+        public JsonObjectVisualizer()
         {
             InitializeComponent();
         }
@@ -20,18 +20,18 @@ namespace EPocalipse.Json.Viewer
             get { return "Property Grid"; }
         }
 
-        Control IJsonVisualizer.GetControl(JsonTreeNode node)
+        Control IJsonVisualizer.GetControl(JsonObject jsonObject)
         {
             return this;
         }
 
-        void IJsonVisualizer.Visualize(JsonTreeNode node)
+        void IJsonVisualizer.Visualize(JsonObject jsonObject)
         {
-            this.pgJsonObject.SelectedObject = new JsonTreeNodeTypeDescriptor(node);
+            this.pgJsonObject.SelectedObject = new JsonTreeObjectTypeDescriptor(jsonObject);
         }
 
 
-        bool IJsonViewerPlugin.CanVisualize(JsonTreeNode node)
+        bool IJsonViewerPlugin.CanVisualize(JsonObject jsonObject)
         {
             return true;
         }

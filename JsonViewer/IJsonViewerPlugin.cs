@@ -8,17 +8,17 @@ namespace EPocalipse.Json.Viewer
     public interface IJsonViewerPlugin
     {
         string DisplayName {get;}
-        bool CanVisualize(JsonTreeNode node);
+        bool CanVisualize(JsonObject jsonObject);
     }
 
-    public interface IJsonTextVisualizer : IJsonViewerPlugin
+    public interface ICustomTextProvider : IJsonViewerPlugin
     {
-        string GetText(JsonTreeNode node);
+        string GetText(JsonObject jsonObject);
     }
 
     public interface IJsonVisualizer : IJsonViewerPlugin
     {
-        Control GetControl(JsonTreeNode node);
-        void Visualize(JsonTreeNode node);
+        Control GetControl(JsonObject jsonObject);
+        void Visualize(JsonObject jsonObject);
     }
 }

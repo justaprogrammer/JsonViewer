@@ -71,7 +71,7 @@ namespace EPocalipse.Json.Viewer
                     cbVisualizers.Items.Clear();
                     if (!String.IsNullOrEmpty(_json))
                     {
-                        JsonTree tree = JsonTree.Parse(_json);
+                        JsonObjectTree tree = JsonObjectTree.Parse(_json);
                         VisualizeJsonTree(tree);
                     }
                 }
@@ -114,7 +114,7 @@ namespace EPocalipse.Json.Viewer
             ShowInfo(_errorDetails.Error);
         }
 
-        private void VisualizeJsonTree(JsonTree tree)
+        private void VisualizeJsonTree(JsonObjectTree tree)
         {
             AddNode(tvJson.Nodes, tree.Root);
             JsonViewerTreeNode node = GetRootNode();
@@ -123,18 +123,18 @@ namespace EPocalipse.Json.Viewer
             tvJson.SelectedNode = node;
         }
 
-        private void AddNode(TreeNodeCollection nodes, JsonTreeNode jsonNode)
+        private void AddNode(TreeNodeCollection nodes, JsonObject jsonObject)
         {
-            JsonViewerTreeNode newNode = new JsonViewerTreeNode(jsonNode);
+            JsonViewerTreeNode newNode = new JsonViewerTreeNode(jsonObject);
             nodes.Add(newNode);
-            newNode.Text = jsonNode.Text;
-            newNode.Tag = jsonNode;
-            newNode.ImageIndex = (int)jsonNode.JsonType;
+            newNode.Text = jsonObject.Text;
+            newNode.Tag = jsonObject;
+            newNode.ImageIndex = (int)jsonObject.JsonType;
             newNode.SelectedImageIndex = newNode.ImageIndex;
 
-            foreach (JsonTreeNode childJsonNode in jsonNode.Nodes)
+            foreach (JsonObject field in jsonObject.Fields)
             {
-                AddNode(newNode.Nodes, childJsonNode);
+                AddNode(newNode.Nodes, field);
             }
         }
 
@@ -393,8 +393,8 @@ namespace EPocalipse.Json.Viewer
             IJsonVisualizer visualizer = (IJsonVisualizer)cbVisualizers.SelectedItem;
             if (visualizer != null)
             {
-                JsonTreeNode jsonNode = GetSelectedTreeNode().JsonNode;
-                Control visualizerCtrl = visualizer.GetControl(jsonNode);
+                JsonObject jsonObject = GetSelectedTreeNode().JsonObject;
+                Control visualizerCtrl = visualizer.GetControl(jsonObject);
                 if (_lastVisualizerControl != visualizerCtrl)
                 {
                     pnlVisualizer.Controls.Remove(_lastVisualizerControl);
@@ -402,7 +402,7 @@ namespace EPocalipse.Json.Viewer
                     visualizerCtrl.Dock = DockStyle.Fill;
                     _lastVisualizerControl = visualizerCtrl;
                 }
-                visualizer.Visualize(jsonNode);
+                visualizer.Visualize(jsonObject);
             }
         }
 
@@ -434,10 +434,10 @@ namespace EPocalipse.Json.Viewer
             if (!node.Initialized)
             {
                 node.Initialized = true;
-                JsonTreeNode jsonNode = node.JsonNode;
-                foreach (IJsonTextVisualizer textVis in _pluginsManager.TextVisualizers)
+                JsonObject jsonObject = node.JsonObject;
+                foreach (ICustomTextProvider textVis in _pluginsManager.TextVisualizers)
                 {
-                    if (textVis.CanVisualize(jsonNode))
+                    if (textVis.CanVisualize(jsonObject))
                         node.TextVisualizers.Add(textVis);
                 }
 
@@ -445,7 +445,7 @@ namespace EPocalipse.Json.Viewer
 
                 foreach (IJsonVisualizer visualizer in _pluginsManager.Visualizers)
                 {
-                    if (visualizer.CanVisualize(jsonNode))
+                    if (visualizer.CanVisualize(jsonObject))
                         node.Visualizers.Add(visualizer);
                 }
             }
@@ -566,9 +566,9 @@ namespace EPocalipse.Json.Viewer
         private void mnuCopyValue_Click(object sender, EventArgs e)
         {
             JsonViewerTreeNode node = GetSelectedTreeNode();
-            if (node != null && node.JsonNode.Value != null)
+            if (node != null && node.JsonObject.Value != null)
             {
-                Clipboard.SetText(node.JsonNode.Value.ToString());
+                Clipboard.SetText(node.JsonObject.Value.ToString());
             }
         }
     }
@@ -603,18 +603,18 @@ namespace EPocalipse.Json.Viewer
 
     internal class JsonViewerTreeNode : TreeNode
     {
-        JsonTreeNode _jsonNode;
-        List<IJsonTextVisualizer> _textVisualizers = new List<IJsonTextVisualizer>();
+        JsonObject _jsonObject;
+        List<ICustomTextProvider> _textVisualizers = new List<ICustomTextProvider>();
         List<IJsonVisualizer> _visualizers = new List<IJsonVisualizer>();
         private bool _init;
         private IJsonVisualizer _lastVisualizer;
 
-        public JsonViewerTreeNode(JsonTreeNode jsonNode)
+        public JsonViewerTreeNode(JsonObject jsonObject)
         {
-            _jsonNode = jsonNode;
+            _jsonObject = jsonObject;
         }
 
-        public List<IJsonTextVisualizer> TextVisualizers
+        public List<ICustomTextProvider> TextVisualizers
         {
             get
             {
@@ -630,11 +630,11 @@ namespace EPocalipse.Json.Viewer
             }
         }
 
-        public JsonTreeNode JsonNode
+        public JsonObject JsonObject
         {
             get
             {
-                return _jsonNode;
+                return _jsonObject;
             }
         }
 
@@ -652,11 +652,11 @@ namespace EPocalipse.Json.Viewer
 
         internal void RefreshText()
         {
-            string text = _jsonNode.Text;
+            string text = _jsonObject.Text;
             StringBuilder sb = new StringBuilder(text);
-            foreach (IJsonTextVisualizer textVisualizer in _textVisualizers)
+            foreach (ICustomTextProvider textVisualizer in _textVisualizers)
             {
-                string customText = textVisualizer.GetText(_jsonNode);
+                string customText = textVisualizer.GetText(_jsonObject);
                 sb.Append(" (" + customText + ")");
             }
             this.Text = sb.ToString();

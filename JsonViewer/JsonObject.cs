@@ -7,18 +7,18 @@ using System.Diagnostics;
 namespace EPocalipse.Json.Viewer
 {
     [DebuggerDisplay("Text = {Text}")]
-    public class JsonTreeNode
+    public class JsonObject
     {
         private string _id;
         private object _value;
         private JsonType _jsonType;
-        private JsonTreeNodes _nodes;
-        private JsonTreeNode _parent;
+        private JsonFields _fields;
+        private JsonObject _parent;
         private string _text;
 
-        public JsonTreeNode()
+        public JsonObject()
         {
-            _nodes=new JsonTreeNodes(this);
+            _fields=new JsonFields(this);
         }
 
         public string Id
@@ -57,7 +57,7 @@ namespace EPocalipse.Json.Viewer
             }
         }
 
-        public JsonTreeNode Parent
+        public JsonObject Parent
         {
             get
             {
@@ -89,11 +89,11 @@ namespace EPocalipse.Json.Viewer
             }
         }
 
-        public JsonTreeNodes Nodes
+        public JsonFields Fields
         {
             get
             {
-                return _nodes;
+                return _fields;
             }
         }
 
@@ -106,10 +106,16 @@ namespace EPocalipse.Json.Viewer
         {
             foreach (string s in ids)
             {
-            if (!_nodes.ContainId(s))
+            if (!_fields.ContainId(s))
                 return false;
             }
             return true;
+        }
+
+        public bool ContainsField(string id, JsonType type)
+        {
+            JsonObject field = Fields[id];
+            return (field != null && field.JsonType == type);
         }
     }
 }

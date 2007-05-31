@@ -5,13 +5,13 @@ using System.Windows.Forms;
 
 namespace EPocalipse.Json.Viewer
 {
-    class AjaxNetDateTime: IJsonTextVisualizer
+    class AjaxNetDateTime: ICustomTextProvider
     {
         static readonly long epoch=new DateTime(1970, 1, 1).Ticks;
 
-        public string GetText(JsonTreeNode node)
+        public string GetText(JsonObject jsonObject)
         {
-            string text = (string)node.Value; 
+            string text = (string)jsonObject.Value; 
             return "Ajax.Net Date:"+ConvertJSTicksToDateTime(Convert.ToInt64(text.Substring(1, text.Length - 2))).ToString();
         }
 
@@ -25,11 +25,11 @@ namespace EPocalipse.Json.Viewer
             get { return "Ajax.Net DateTime"; }
         }
 
-        public bool CanVisualize(JsonTreeNode node)
+        public bool CanVisualize(JsonObject jsonObject)
         {
-            if (node.JsonType == JsonType.Value && node.Value is string)
+            if (jsonObject.JsonType == JsonType.Value && jsonObject.Value is string)
             {
-                string text = (string)node.Value;
+                string text = (string)jsonObject.Value;
                 return (text.Length > 2 && text[0] == '@' && text[text.Length - 1] == '@');
             }
             return false;
@@ -40,7 +40,7 @@ namespace EPocalipse.Json.Viewer
     {
         TextBox tb;
 
-        public Control GetControl(JsonTreeNode node)
+        public Control GetControl(JsonObject jsonObject)
         {
             if (tb == null)
             {
@@ -50,9 +50,9 @@ namespace EPocalipse.Json.Viewer
             return tb;
         }
 
-        public void Visualize(JsonTreeNode node)
+        public void Visualize(JsonObject jsonObject)
         {
-            tb.Text = String.Format("Array {0} has {1} items", node.Id, node.Nodes.Count);
+            tb.Text = String.Format("Array {0} has {1} items", jsonObject.Id, jsonObject.Fields.Count);
         }
 
         public string DisplayName
@@ -60,9 +60,9 @@ namespace EPocalipse.Json.Viewer
             get { return "Sample"; }
         }
 
-        public bool CanVisualize(JsonTreeNode node)
+        public bool CanVisualize(JsonObject jsonObject)
         {
-            return (node.JsonType == JsonType.Array) && (node.ContainsFields("[0]"));
+            return (jsonObject.JsonType == JsonType.Array) && (jsonObject.ContainsFields("[0]"));
         }
     }
 }

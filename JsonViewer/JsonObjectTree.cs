@@ -19,12 +19,11 @@ namespace EPocalipse.Json.Viewer
 
     }
 
-    public class JsonTree
+    public class JsonObjectTree
     {
-        private JsonTreeNode _root;
-        private static NodeVisualizer _nodeVisualizer = new NodeVisualizer();
+        private JsonObject _root;
 
-        public static JsonTree Parse(string json)
+        public static JsonObjectTree Parse(string json)
         {
             //Parse the JSON string
             object jsonObject;
@@ -37,30 +36,30 @@ namespace EPocalipse.Json.Viewer
                 throw new JsonParseError(e.Message, e);
             }
             //Parse completed, build the tree
-            return new JsonTree(jsonObject);
+            return new JsonObjectTree(jsonObject);
         }
 
-        public JsonTree(object rootObject)
+        public JsonObjectTree(object rootObject)
         {
-            _root = ConvertToTreeNode("JSON", rootObject);
+            _root = ConvertToObject("JSON", rootObject);
         }
 
-        private JsonTreeNode ConvertToTreeNode(string id, object jsonObject)
+        private JsonObject ConvertToObject(string id, object jsonObject)
         {
-            JsonTreeNode node = CreateTeeNode(jsonObject);
-            node.Id = id;
-            AddChildren(jsonObject, node);
-            return node;
+            JsonObject obj = CreateJsonObject(jsonObject);
+            obj.Id = id;
+            AddChildren(jsonObject, obj);
+            return obj;
         }
 
-        private void AddChildren(object jsonObject, JsonTreeNode node)
+        private void AddChildren(object jsonObject, JsonObject obj)
         {
             JavaScriptObject javaScriptObject = jsonObject as JavaScriptObject;
             if (javaScriptObject != null)
             {
                 foreach (KeyValuePair<string, object> pair in javaScriptObject)
                 {
-                    node.Nodes.Add(ConvertToTreeNode(pair.Key, pair.Value));
+                    obj.Fields.Add(ConvertToObject(pair.Key, pair.Value));
                 }
             }
             else
@@ -70,28 +69,28 @@ namespace EPocalipse.Json.Viewer
                 {
                     for (int i = 0; i < javaScriptArray.Count; i++)
                     {
-                        node.Nodes.Add(ConvertToTreeNode("[" + i.ToString() + "]", javaScriptArray[i]));
+                        obj.Fields.Add(ConvertToObject("[" + i.ToString() + "]", javaScriptArray[i]));
                     }
                 }
             }
         }
 
-        private JsonTreeNode CreateTeeNode(object jsonObject)
+        private JsonObject CreateJsonObject(object jsonObject)
         {
-            JsonTreeNode node = new JsonTreeNode();
+            JsonObject obj = new JsonObject();
             if (jsonObject is JavaScriptArray)
-                node.JsonType = JsonType.Array;
+                obj.JsonType = JsonType.Array;
             else if (jsonObject is JavaScriptObject)
-                node.JsonType = JsonType.Object;
+                obj.JsonType = JsonType.Object;
             else
             {
-                node.JsonType = JsonType.Value;
-                node.Value = jsonObject;
+                obj.JsonType = JsonType.Value;
+                obj.Value = jsonObject;
             }
-            return node;
+            return obj;
         }
 
-        public JsonTreeNode Root
+        public JsonObject Root
         {
             get
             {
