@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiddlerJsonViewer", "Fiddler\FiddlerJsonViewer.csproj", "{4B6A26FA-0D44-4354-92E7-54FC5A75469B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonVisualizer", "Visualizer\JsonVisualizer.csproj", "{32BEAE8D-282C-4414-9B7F-2F0E9450369A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonView", "JsonView\JsonView.csproj", "{83D82889-66FA-41AC-932F-9AF3AE8EAA9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonViewer", "JsonViewer\JsonViewer.csproj", "{3AE264FB-52DC-4295-A37F-CE63CAF54930}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs03.codeplex.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Fiddler\\FiddlerJsonViewer.csproj
+		SccProjectName1 = Fiddler
+		SccLocalPath1 = Fiddler
+		SccProjectUniqueName2 = JsonView\\JsonView.csproj
+		SccProjectName2 = JsonView
+		SccLocalPath2 = JsonView
+		SccProjectUniqueName3 = JsonViewer\\JsonViewer.csproj
+		SccProjectName3 = JsonViewer
+		SccLocalPath3 = JsonViewer
+		SccProjectUniqueName4 = Visualizer\\JsonVisualizer.csproj
+		SccProjectName4 = Visualizer
+		SccLocalPath4 = Visualizer
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B6A26FA-0D44-4354-92E7-54FC5A75469B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B6A26FA-0D44-4354-92E7-54FC5A75469B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B6A26FA-0D44-4354-92E7-54FC5A75469B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B6A26FA-0D44-4354-92E7-54FC5A75469B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32BEAE8D-282C-4414-9B7F-2F0E9450369A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32BEAE8D-282C-4414-9B7F-2F0E9450369A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32BEAE8D-282C-4414-9B7F-2F0E9450369A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32BEAE8D-282C-4414-9B7F-2F0E9450369A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83D82889-66FA-41AC-932F-9AF3AE8EAA9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83D82889-66FA-41AC-932F-9AF3AE8EAA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83D82889-66FA-41AC-932F-9AF3AE8EAA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83D82889-66FA-41AC-932F-9AF3AE8EAA9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AE264FB-52DC-4295-A37F-CE63CAF54930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AE264FB-52DC-4295-A37F-CE63CAF54930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AE264FB-52DC-4295-A37F-CE63CAF54930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AE264FB-52DC-4295-A37F-CE63CAF54930}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
