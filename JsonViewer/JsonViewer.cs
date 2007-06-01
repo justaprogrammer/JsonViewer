@@ -9,6 +9,7 @@ using System.Drawing.Design;
 using Newtonsoft.Json;
 using System.IO;
 using System.Threading;
+using EPocalipse.Json.Viewer.Properties;
 
 namespace EPocalipse.Json.Viewer
 {
@@ -24,7 +25,14 @@ namespace EPocalipse.Json.Viewer
         public JsonViewer()
         {
             InitializeComponent();
-            _pluginsManager.Initialize();
+            try
+            {
+                _pluginsManager.Initialize();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(String.Format(Resources.ConfigMessage,e.Message), "Json Viewer", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         [Editor("System.ComponentModel.Design.MultilineStringEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
@@ -65,10 +73,7 @@ namespace EPocalipse.Json.Viewer
                 tvJson.BeginUpdate();
                 try
                 {
-                    ClearInfo();
-                    tvJson.Nodes.Clear();
-                    pnlVisualizer.Controls.Clear();
-                    cbVisualizers.Items.Clear();
+                    Reset();
                     if (!String.IsNullOrEmpty(_json))
                     {
                         JsonObjectTree tree = JsonObjectTree.Parse(_json);
@@ -88,6 +93,15 @@ namespace EPocalipse.Json.Viewer
             {
                 ShowException(e);
             }
+        }
+
+        private void Reset()
+        {
+            ClearInfo();
+            tvJson.Nodes.Clear();
+            pnlVisualizer.Controls.Clear();
+            _lastVisualizerControl = null;
+            cbVisualizers.Items.Clear();
         }
 
         private void GetParseErrorDetails(Exception parserError)

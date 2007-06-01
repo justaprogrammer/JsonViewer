@@ -1,0 +1,22 @@
+{
+    "grid": {
+        "headers": [
+            {
+                "name": "Name"
+            },
+            {
+                "name": "Count"
+            }
+        ],
+        "rows": [
+            [
+                "Joe",
+                10
+            ],
+            [
+                "Jack",
+                20
+            ]
+        ]
+    }
+}

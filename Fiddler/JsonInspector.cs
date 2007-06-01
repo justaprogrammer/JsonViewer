@@ -23,11 +23,12 @@ namespace EPocalipse.Json.Fiddler
 
         public override void Announce()
         {
+            MessageBox.Show("Json Inspector 0.1\nCopyright (c) 2007 Eyal Post\nhttp://www.epocalipse.com/blog", "Json Viewer", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public override void ShowAboutBox()
         {
-            MessageBox.Show("Json Inspector 0.1\nCopyright (c) 2007 Eyal Post\nhttp://www.epocalipse.com/blog", "Json Viewer");
+            MessageBox.Show("Json Inspector 0.1\nCopyright (c) 2007 Eyal Post\nhttp://www.epocalipse.com/blog", "Json Viewer", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public override int GetOrder()

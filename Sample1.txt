@@ -1,0 +1,31 @@
+{
+    "name": "My Object",
+    "Date 1": new Date(997612400000),
+    "Date 2": "@997612400000@",
+    "Double": 100.5,
+    "array": [
+        1,
+        1.5,
+        "@997612400000@"
+    ],
+    "grid": {
+        "headers": [
+            {
+                "name": "Name"
+            },
+            {
+                "name": "Count"
+            }
+        ],
+        "rows": [
+            [
+                "Joe",
+                10
+            ],
+            [
+                "Jack",
+                20
+            ]
+        ]
+    }
+}

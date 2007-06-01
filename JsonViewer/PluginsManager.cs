@@ -21,41 +21,66 @@ namespace EPocalipse.Json.Viewer
 
         public void Initialize()
         {
-            string myDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            //AppDomain.CurrentDomain.SetupInformation.PrivateBinPath;
-
-            Configuration config=ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
-            if (config != null)
+            try
             {
+                string myDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                //AppDomain.CurrentDomain.SetupInformation.PrivateBinPath;
+
+                Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+                if (config == null)
+                    InitDefaults();
                 ViewerConfiguration viewerConfig = (ViewerConfiguration)config.GetSection("jsonViewer");
-                if (viewerConfig != null)
+                InternalConfig(viewerConfig);
+            }
+            catch
+            {
+                InitDefaults();
+                throw;
+            }
+        }
+
+        private void InitDefaults()
+        {
+            if (this._defaultVisualizer == null)
+            {
+                AddPlugin(new JsonObjectVisualizer());   
+            }
+        }
+
+        private void InternalConfig(ViewerConfiguration viewerConfig)
+        {
+            if (viewerConfig != null)
+            {
+                foreach (KeyValueConfigurationElement keyValue in viewerConfig.Plugins)
                 {
-                    foreach (KeyValueConfigurationElement keyValue in viewerConfig.Plugins)
+                    string type = keyValue.Value;
+                    Type pluginType = Type.GetType(type, false);
+                    if (pluginType != null && typeof(IJsonViewerPlugin).IsAssignableFrom(pluginType))
                     {
-                        string type = keyValue.Value;
-                        Type pluginType = Type.GetType(type, false);
-                        if (pluginType != null && typeof(IJsonViewerPlugin).IsAssignableFrom(pluginType))
+                        try
                         {
-                            try
-                            {
-                                IJsonViewerPlugin plugin = (IJsonViewerPlugin)Activator.CreateInstance(pluginType);
-                                plugins.Add(plugin);
-                                if (plugin is ICustomTextProvider)
-                                    textVisualizers.Add((ICustomTextProvider)plugin);
-                                if (plugin is IJsonVisualizer)
-                                {
-                                    if (_defaultVisualizer == null)
-                                        _defaultVisualizer = (IJsonVisualizer)plugin;
-                                    visualizers.Add((IJsonVisualizer)plugin);
-                                }
-                            }
-                            catch
-                            {
-                                //Silently ignore any errors in plugin creation
-                            }
+                            IJsonViewerPlugin plugin = (IJsonViewerPlugin)Activator.CreateInstance(pluginType);
+                            AddPlugin(plugin);
+                        }
+                        catch
+                        {
+                            //Silently ignore any errors in plugin creation
                         }
                     }
                 }
+            }
+        }
+
+        private void AddPlugin(IJsonViewerPlugin plugin)
+        {
+            plugins.Add(plugin);
+            if (plugin is ICustomTextProvider)
+                textVisualizers.Add((ICustomTextProvider)plugin);
+            if (plugin is IJsonVisualizer)
+            {
+                if (_defaultVisualizer == null)
+                    _defaultVisualizer = (IJsonVisualizer)plugin;
+                visualizers.Add((IJsonVisualizer)plugin);
             }
         }
 

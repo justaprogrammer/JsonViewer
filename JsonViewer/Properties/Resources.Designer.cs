@@ -59,5 +59,15 @@ namespace EPocalipse.Json.Viewer.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was an error during initialization. If you get this message when trying to use the Fiddler plugin or the Visual Studio Visualizer, please follow the instructions in the ReadMe.txt file. 
+        ///The error was: {0}.
+        /// </summary>
+        internal static string ConfigMessage {
+            get {
+                return ResourceManager.GetString("ConfigMessage", resourceCulture);
+            }
+        }
     }
 }

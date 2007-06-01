@@ -117,4 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ConfigMessage" xml:space="preserve">
+    <value>There was an error during initialization. If you get this message when trying to use the Fiddler plugin or the Visual Studio Visualizer, please follow the instructions in the ReadMe.txt file. 
+The error was: {0}</value>
+  </data>
 </root>

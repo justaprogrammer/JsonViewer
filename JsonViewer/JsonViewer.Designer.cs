@@ -35,6 +35,9 @@ namespace EPocalipse.Json.Viewer
             this.mnuTree = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuFind = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExpandAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCopyValue = new System.Windows.Forms.ToolStripMenuItem();
             this.imgList = new System.Windows.Forms.ImageList(this.components);
             this.pnlFind = new System.Windows.Forms.Panel();
             this.btnCloseFind = new System.Windows.Forms.Button();
@@ -58,9 +61,6 @@ namespace EPocalipse.Json.Viewer
             this.btnStripToCurly = new System.Windows.Forms.ToolStripMenuItem();
             this.btnStripToSqr = new System.Windows.Forms.ToolStripMenuItem();
             this.lblError = new System.Windows.Forms.Label();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuCopy = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCopyValue = new System.Windows.Forms.ToolStripMenuItem();
             this.spcViewer.Panel1.SuspendLayout();
             this.spcViewer.Panel2.SuspendLayout();
             this.spcViewer.SuspendLayout();
@@ -119,22 +119,41 @@ namespace EPocalipse.Json.Viewer
             this.mnuCopy,
             this.mnuCopyValue});
             this.mnuTree.Name = "mnuTree";
-            this.mnuTree.Size = new System.Drawing.Size(153, 120);
+            this.mnuTree.Size = new System.Drawing.Size(129, 98);
             this.mnuTree.Opening += new System.ComponentModel.CancelEventHandler(this.mnuTree_Opening);
             // 
             // mnuFind
             // 
             this.mnuFind.Name = "mnuFind";
-            this.mnuFind.Size = new System.Drawing.Size(152, 22);
+            this.mnuFind.Size = new System.Drawing.Size(128, 22);
             this.mnuFind.Text = "&Find";
             this.mnuFind.Click += new System.EventHandler(this.findToolStripMenuItem_Click);
             // 
             // mnuExpandAll
             // 
             this.mnuExpandAll.Name = "mnuExpandAll";
-            this.mnuExpandAll.Size = new System.Drawing.Size(152, 22);
+            this.mnuExpandAll.Size = new System.Drawing.Size(128, 22);
             this.mnuExpandAll.Text = "Expand &All";
             this.mnuExpandAll.Click += new System.EventHandler(this.expandallToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(125, 6);
+            // 
+            // mnuCopy
+            // 
+            this.mnuCopy.Name = "mnuCopy";
+            this.mnuCopy.Size = new System.Drawing.Size(128, 22);
+            this.mnuCopy.Text = "&Copy";
+            this.mnuCopy.Click += new System.EventHandler(this.mnuCopy_Click);
+            // 
+            // mnuCopyValue
+            // 
+            this.mnuCopyValue.Name = "mnuCopyValue";
+            this.mnuCopyValue.Size = new System.Drawing.Size(128, 22);
+            this.mnuCopyValue.Text = "Copy &Value";
+            this.mnuCopyValue.Click += new System.EventHandler(this.mnuCopyValue_Click);
             // 
             // imgList
             // 
@@ -279,6 +298,7 @@ namespace EPocalipse.Json.Viewer
             // txtJson
             // 
             this.txtJson.AcceptsReturn = true;
+            this.txtJson.AcceptsTab = true;
             this.txtJson.BackColor = System.Drawing.SystemColors.Info;
             this.txtJson.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtJson.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -375,25 +395,6 @@ namespace EPocalipse.Json.Viewer
             this.lblError.Name = "lblError";
             this.lblError.Size = new System.Drawing.Size(778, 24);
             this.lblError.TabIndex = 5;
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // mnuCopy
-            // 
-            this.mnuCopy.Name = "mnuCopy";
-            this.mnuCopy.Size = new System.Drawing.Size(152, 22);
-            this.mnuCopy.Text = "&Copy";
-            this.mnuCopy.Click += new System.EventHandler(this.mnuCopy_Click);
-            // 
-            // mnuCopyValue
-            // 
-            this.mnuCopyValue.Name = "mnuCopyValue";
-            this.mnuCopyValue.Size = new System.Drawing.Size(152, 22);
-            this.mnuCopyValue.Text = "Copy &Value";
-            this.mnuCopyValue.Click += new System.EventHandler(this.mnuCopyValue_Click);
             // 
             // JsonViewer
             // 
