@@ -11,9 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonViewer", "JsonViewer\Js
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{E9E44130-70CC-442C-A77C-A1112310354A}"
 	ProjectSection(SolutionItems) = preProject
-		GridSample.txt = GridSample.txt
-		Sample1.txt = Sample1.txt
-		Sample2.txt = Sample2.txt
+		Samples\GridSample.txt = Samples\GridSample.txt
+		Samples\Sample1.txt = Samples\Sample1.txt
+		Samples\Sample2.txt = Samples\Sample2.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0508F31B-5B21-4096-A3B7-280815BBECAE}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.txt = Readme.txt
 	EndProjectSection
 EndProject
 Global
