@@ -670,8 +670,15 @@ namespace EPocalipse.Json.Viewer
             StringBuilder sb = new StringBuilder(text);
             foreach (ICustomTextProvider textVisualizer in _textVisualizers)
             {
-                string customText = textVisualizer.GetText(_jsonObject);
-                sb.Append(" (" + customText + ")");
+                try
+                {
+                    string customText = textVisualizer.GetText(_jsonObject);
+                    sb.Append(" (" + customText + ")");
+                }
+                catch
+                {
+                    //silently ignore
+                }
             }
             this.Text = sb.ToString();
         }

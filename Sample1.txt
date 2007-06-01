@@ -2,6 +2,7 @@
     "name": "My Object",
     "Date 1": new Date(997612400000),
     "Date 2": "@997612400000@",
+    "Custom Date": {"y":2007,"M":5,"d":28,"h":8,"m":0,"s":0,"ms":0},
     "Double": 100.5,
     "array": [
         1,

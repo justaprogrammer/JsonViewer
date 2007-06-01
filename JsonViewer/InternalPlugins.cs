@@ -36,6 +36,32 @@ namespace EPocalipse.Json.Viewer
         }
     }
 
+    class CustomDate : ICustomTextProvider
+    {
+        public string GetText(JsonObject jsonObject)
+        {
+            int year,month,day,hour,min,second,ms;
+            year = (int)(long)jsonObject.Fields["y"].Value;
+            month = (int)(long)jsonObject.Fields["M"].Value;
+            day = (int)(long)jsonObject.Fields["d"].Value;
+            hour = (int)(long)jsonObject.Fields["h"].Value;
+            min = (int)(long)jsonObject.Fields["m"].Value;
+            second = (int)(long)jsonObject.Fields["s"].Value;
+            ms = (int)(long)jsonObject.Fields["ms"].Value;
+            return new DateTime(year, month, day, hour, min, second, ms).ToString();
+        }
+
+        public string DisplayName
+        {
+            get { return "Date"; }
+        }
+
+        public bool CanVisualize(JsonObject jsonObject)
+        {
+            return jsonObject.ContainsFields("y","M","d","h","m","s","ms");
+        }
+    }
+
     class Sample : IJsonVisualizer
     {
         TextBox tb;
