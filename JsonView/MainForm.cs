@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using EPocalipse.Json.Viewer;
+using System.IO;
 
 namespace EPocalipse.Json.JsonView
 {
@@ -19,13 +20,25 @@ namespace EPocalipse.Json.JsonView
         private void MainForm_Shown(object sender, EventArgs e)
         {
             string[] args = Environment.GetCommandLineArgs();
-            foreach (string arg in args)
+            for (int i = 1; i < args.Length; i++)
             {
+                string arg = args[i];
                 if (arg.Equals("/c", StringComparison.OrdinalIgnoreCase))
                 {
                     LoadFromClipboard();
                 }
+                else if (File.Exists(arg))
+                {
+                    LoadFromFile(arg);
+                }
             }
+        }
+
+        private void LoadFromFile(string fileName)
+        {
+            string json = File.ReadAllText(fileName);
+            JsonViewer.ShowTab(Tabs.Viewer);
+            JsonViewer.Json = json;
         }
 
         private void LoadFromClipboard()

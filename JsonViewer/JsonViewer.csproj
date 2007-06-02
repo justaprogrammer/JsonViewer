@@ -34,7 +34,7 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Temp\json\Source\Newtonsoft.Json\bin\Release\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\Bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GridVisualizer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GridVisualizer.Designer.cs">
+      <DependentUpon>GridVisualizer.cs</DependentUpon>
+    </Compile>
     <Compile Include="InternalPlugins.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -76,6 +82,10 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GridVisualizer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GridVisualizer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="JsonViewer.resx">
       <SubType>Designer</SubType>
       <DependentUpon>JsonViewer.cs</DependentUpon>
