@@ -47,7 +47,7 @@ namespace EPocalipse.Json.JsonView
             this.ClientSize = new System.Drawing.Size(933, 680);
             this.Controls.Add(this.JsonViewer);
             this.Name = "MainForm";
-            this.Text = "Json Viewer";
+            this.Text = "JSON Viewer";
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
