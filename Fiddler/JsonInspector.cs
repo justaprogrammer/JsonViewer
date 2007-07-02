@@ -4,10 +4,12 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using EPocalipse.Json.Viewer;
+using Fiddler;
+using System.Drawing;
 
 namespace EPocalipse.Json.Fiddler
 {
-    public class JsonInspector : Inspector, IResponseInspector
+    public class JsonInspector : Inspector2, IResponseInspector2
     {
         private byte[] _body;
         JsonViewer viewer;
@@ -21,14 +23,18 @@ namespace EPocalipse.Json.Fiddler
             viewer.Dock = DockStyle.Fill;
         }
 
-        public override void Announce()
-        {
-            MessageBox.Show("Json Inspector 0.1\nCopyright (c) 2007 Eyal Post\nhttp://www.epocalipse.com/blog", "Json Viewer", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
         public override void ShowAboutBox()
         {
-            MessageBox.Show("Json Inspector 0.1\nCopyright (c) 2007 Eyal Post\nhttp://www.epocalipse.com/blog", "Json Viewer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Json Inspector 1.1\nCopyright (c) 2007 Eyal Post\nhttp://www.epocalipse.com/blog", "Json Viewer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public override int ScoreForContentType(string sMIMEType)
+        {
+            if (string.Compare(sMIMEType, "text/json", true) == 0)
+            {
+                return 50;
+            }
+            return 0;
         }
 
         public override int GetOrder()
@@ -104,6 +110,11 @@ namespace EPocalipse.Json.Fiddler
             {
                 _headers = value;
             }
+        }
+
+        public override void SetFontSize(float flSizeInPoints)
+        {
+            viewer.Font = new Font(viewer.Font.FontFamily, flSizeInPoints, FontStyle.Regular, GraphicsUnit.Point);
         }
     }
 }

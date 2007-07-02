@@ -124,8 +124,14 @@ namespace EPocalipse.Json.Viewer
             if (_errorDetails.Position == 0)
                 _errorDetails._pos = _json.Length;
             if (!txtJson.ContainsFocus)
-                txtJson.Select(Math.Max(0, _errorDetails.Position - 1), 1);
-            ShowInfo(_errorDetails.Error);
+                MarkError(_errorDetails);
+            ShowInfo(_errorDetails);
+        }
+
+        private void MarkError(ErrorDetails _errorDetails)
+        {
+            txtJson.Select(Math.Max(0, _errorDetails.Position - 1), 10);
+            txtJson.ScrollToCaret();
         }
 
         private void VisualizeJsonTree(JsonObjectTree tree)
@@ -168,6 +174,17 @@ namespace EPocalipse.Json.Viewer
         public void ShowInfo(string info)
         {
             lblError.Text = info;
+            lblError.Tag = null;
+            lblError.Enabled = false;
+            tabControl.SelectedTab = pageTextView;
+        }
+
+        public void ShowInfo(ErrorDetails error)
+        {
+            ShowInfo(error.Error);
+            lblError.Text = error.Error;
+            lblError.Tag = error;
+            lblError.Enabled = true;
             tabControl.SelectedTab = pageTextView;
         }
 
@@ -584,6 +601,37 @@ namespace EPocalipse.Json.Viewer
             {
                 Clipboard.SetText(node.JsonObject.Value.ToString());
             }
+        }
+
+        private void lblError_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (lblError.Enabled && lblError.Tag != null)
+            {
+                ErrorDetails err = (ErrorDetails)lblError.Tag;
+                MarkError(err);
+            }
+        }
+
+        private void removeNewLineMenuItem_Click(object sender, EventArgs e)
+        {
+            StripFromText('\n', '\r');
+        }
+
+        private void removeSpecialCharsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string text = txtJson.Text;
+            text = text.Replace(@"\""", @"""");
+            txtJson.Text = text;
+        }
+
+        private void StripFromText(params char[] chars)
+        {
+            string text = txtJson.Text;
+            foreach (char ch in chars)
+            {
+                text = text.Replace(ch.ToString(), "");
+            }
+            txtJson.Text = text;
         }
     }
 
