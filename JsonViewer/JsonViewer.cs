@@ -663,7 +663,7 @@ namespace EPocalipse.Json.Viewer
         }
     }
 
-    internal class JsonViewerTreeNode : TreeNode
+    public class JsonViewerTreeNode : TreeNode
     {
         JsonObject _jsonObject;
         List<ICustomTextProvider> _textVisualizers = new List<ICustomTextProvider>();
