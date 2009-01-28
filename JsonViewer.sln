@@ -1,18 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiddlerJsonViewer", "Fiddler\FiddlerJsonViewer.csproj", "{4B6A26FA-0D44-4354-92E7-54FC5A75469B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonVisualizer", "Visualizer\JsonVisualizer.csproj", "{32BEAE8D-282C-4414-9B7F-2F0E9450369A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonView", "JsonView\JsonView.csproj", "{83D82889-66FA-41AC-932F-9AF3AE8EAA9C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonViewer", "JsonViewer\JsonViewer.csproj", "{3AE264FB-52DC-4295-A37F-CE63CAF54930}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{E9E44130-70CC-442C-A77C-A1112310354A}"
 	ProjectSection(SolutionItems) = preProject
 		Samples\GridSample.txt = Samples\GridSample.txt
-		Samples\Sample1.txt = Samples\Sample1.txt
 		Samples\Sample2.txt = Samples\Sample2.txt
 	EndProjectSection
 EndProject
@@ -20,6 +11,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Readme.txt = Readme.txt
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiddlerJsonViewer", "Fiddler\FiddlerJsonViewer.csproj", "{4B6A26FA-0D44-4354-92E7-54FC5A75469B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonVisualizer", "Visualizer\JsonVisualizer.csproj", "{32BEAE8D-282C-4414-9B7F-2F0E9450369A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonView", "JsonView\JsonView.csproj", "{83D82889-66FA-41AC-932F-9AF3AE8EAA9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonViewer", "JsonViewer\JsonViewer.csproj", "{3AE264FB-52DC-4295-A37F-CE63CAF54930}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution

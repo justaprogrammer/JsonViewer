@@ -35,7 +35,6 @@ namespace EPocalipse.Json.Viewer
             catch
             {
                 InitDefaults();
-                throw;
             }
         }
 
@@ -43,7 +42,9 @@ namespace EPocalipse.Json.Viewer
         {
             if (this._defaultVisualizer == null)
             {
-                AddPlugin(new JsonObjectVisualizer());   
+                AddPlugin(new JsonObjectVisualizer());
+                AddPlugin(new AjaxNetDateTime());
+                AddPlugin(new CustomDate());
             }
         }
 
