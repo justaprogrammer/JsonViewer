@@ -35,7 +35,7 @@ namespace EPocalipse.Json.Fiddler
                 return 50;
             }
             return 0;
-        }
+        } 
 
         public override int GetOrder()
         {
