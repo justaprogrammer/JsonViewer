@@ -1,16 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
-using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using System.Collections;
+
+using Newtonsoft.Json;
 
 namespace EPocalipse.Json.Viewer
 {
     public enum JsonType { Object, Array, Value };
 
-    class JsonParseError : ApplicationException
+    internal class JsonParseError : ApplicationException
     {
         public JsonParseError() : base() { }
         public JsonParseError(string message) : base(message) { }
@@ -84,6 +82,7 @@ namespace EPocalipse.Json.Viewer
                 obj.JsonType = JsonType.Object;
             else
             {
+            	
                 obj.JsonType = JsonType.Value;
                 obj.Value = jsonObject;
             }
