@@ -9,11 +9,15 @@ using System.Drawing;
 
 namespace EPocalipse.Json.Fiddler
 {
-    public class JsonInspector : Inspector2, IResponseInspector2
+
+	
+
+	
+    public abstract class JsonInspectorBase : Inspector2
     {
+        protected HTTPHeaders _headers;
         private byte[] _body;
-        JsonViewer viewer;
-        HTTPResponseHeaders _headers;
+        private JsonViewer viewer;
 
         public override void AddToTab(TabPage tabPage)
         {
@@ -35,7 +39,7 @@ namespace EPocalipse.Json.Fiddler
                 return 50;
             }
             return 0;
-        } 
+        }
 
         public override int GetOrder()
         {
@@ -97,18 +101,6 @@ namespace EPocalipse.Json.Fiddler
                 {
                     viewer.ShowInfo("Error parsing JSON. Try using the Transformer to remove the encoding from this response");
                 }
-            }
-        }
-
-        public HTTPResponseHeaders headers
-        {
-            get
-            {
-                return null;
-            }
-            set
-            {
-                _headers = value;
             }
         }
 

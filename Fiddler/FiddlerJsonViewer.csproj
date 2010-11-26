@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JsonInspector.cs" />
+    <Compile Include="JsonInspectorBase.cs" />
+    <Compile Include="JsonRequestInspector.cs" />
+    <Compile Include="JsonResponseInspector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
