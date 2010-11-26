@@ -44,7 +44,7 @@ namespace EPocalipse.Json.Viewer
             _root = ConvertToObject("JSON", rootObject);
         }
 
-        private JsonObject ConvertToObject(string id, object jsonObject)
+        private static JsonObject ConvertToObject(string id, object jsonObject)
         {
             JsonObject obj = CreateJsonObject(jsonObject);
             obj.Id = id;
@@ -52,7 +52,7 @@ namespace EPocalipse.Json.Viewer
             return obj;
         }
 
-        private void AddChildren(object jsonObject, JsonObject obj)
+        private static void AddChildren(object jsonObject, JsonObject obj)
         {
             JavaScriptObject javaScriptObject = jsonObject as JavaScriptObject;
             if (javaScriptObject != null)
@@ -75,7 +75,7 @@ namespace EPocalipse.Json.Viewer
             }
         }
 
-        private JsonObject CreateJsonObject(object jsonObject)
+        private static JsonObject CreateJsonObject(object jsonObject)
         {
             JsonObject obj = new JsonObject();
             if (jsonObject is JavaScriptArray)
