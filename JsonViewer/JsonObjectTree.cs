@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
 
 using Newtonsoft.Json;
 
@@ -20,6 +21,7 @@ namespace EPocalipse.Json.Viewer
     public class JsonObjectTree
     {
         private JsonObject _root;
+        private static Regex dateRegex = new Regex("^/Date\\(([0-9]*)([+-][0-9]{4}){0,1}\\)/$");
 
         public static JsonObjectTree Parse(string json)
         {
@@ -82,7 +84,19 @@ namespace EPocalipse.Json.Viewer
                 obj.JsonType = JsonType.Object;
             else
             {
-            	
+            	if (typeof(string) == jsonObject.GetType()) {
+            		Match match = dateRegex.Match(jsonObject as string);
+        			if (match.Success) {
+            			// I'm not sure why this is match.Groups[1] and not match.Groups[0]
+            			Int64 ticksSinceEpoch = Int64.Parse(match.Groups[1].Value) * (Int64)10e3;
+            			jsonObject = DateTime.SpecifyKind(new DateTime(1970, 1, 1).Add(new TimeSpan(ticksSinceEpoch)), DateTimeKind.Utc);
+            			if (!string.IsNullOrEmpty(match.Groups[2].Value)) {
+            				Int64 timeZoneOffset = Int64.Parse(match.Groups[2].Value);
+            				jsonObject = ((DateTime)jsonObject).AddHours(timeZoneOffset/100);
+            				jsonObject = ((DateTime)jsonObject).AddMinutes(timeZoneOffset%100);
+            			}
+            		}
+            	}
                 obj.JsonType = JsonType.Value;
                 obj.Value = jsonObject;
             }
