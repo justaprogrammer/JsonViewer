@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace EPocalipse.Json.Viewer
 {
@@ -29,7 +30,7 @@ namespace EPocalipse.Json.Viewer
             object jsonObject;
             try
             {
-                jsonObject = JavaScriptConvert.DeserializeObject(json);
+                jsonObject = JsonConvert.DeserializeObject(json);
             }
             catch (Exception e)
             {
@@ -54,17 +55,17 @@ namespace EPocalipse.Json.Viewer
 
         private static void AddChildren(object jsonObject, JsonObject obj)
         {
-            JavaScriptObject javaScriptObject = jsonObject as JavaScriptObject;
+            JObject javaScriptObject = jsonObject as JObject;
             if (javaScriptObject != null)
             {
-                foreach (KeyValuePair<string, object> pair in javaScriptObject)
+                foreach (KeyValuePair<string, JToken> pair in javaScriptObject)
                 {
                     obj.Fields.Add(ConvertToObject(pair.Key, pair.Value));
                 }
             }
             else
             {
-                JavaScriptArray javaScriptArray = jsonObject as JavaScriptArray;
+                JArray javaScriptArray = jsonObject as JArray;
                 if (javaScriptArray != null)
                 {
                     for (int i = 0; i < javaScriptArray.Count; i++)
@@ -78,9 +79,9 @@ namespace EPocalipse.Json.Viewer
         private static JsonObject CreateJsonObject(object jsonObject)
         {
             JsonObject obj = new JsonObject();
-            if (jsonObject is JavaScriptArray)
+            if (jsonObject is JArray)
                 obj.JsonType = JsonType.Array;
-            else if (jsonObject is JavaScriptObject)
+            else if (jsonObject is JObject)
                 obj.JsonType = JsonType.Object;
             else
             {

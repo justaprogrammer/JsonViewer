@@ -107,7 +107,7 @@ namespace EPocalipse.Json.Viewer
         private void GetParseErrorDetails(Exception parserError)
         {
             UnbufferedStringReader strReader = new UnbufferedStringReader(_json);
-            using (JsonReader reader = new JsonReader(strReader))
+            using (JsonReader reader = new JsonTextReader(strReader))
             {
                 try
                 {
@@ -337,12 +337,12 @@ namespace EPocalipse.Json.Viewer
             {
                 string json = txtJson.Text;
                 JsonSerializer s = new JsonSerializer();
-                JsonReader reader = new JsonReader(new StringReader(json));
+                JsonReader reader = new JsonTextReader(new StringReader(json));
                 Object jsonObject = s.Deserialize(reader);
                 if (jsonObject != null)
                 {
                     StringWriter sWriter = new StringWriter();
-                    JsonWriter writer = new JsonWriter(sWriter);
+                    JsonTextWriter writer = new JsonTextWriter(sWriter);
                     writer.Formatting = Formatting.Indented;
                     writer.Indentation = 4;
                     writer.IndentChar = ' ';
