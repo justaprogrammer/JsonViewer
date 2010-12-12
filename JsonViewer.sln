@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 # SharpDevelop 4.0.0.7008
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{E9E44130-70CC-442C-A77C-A1112310354A}"
 	ProjectSection(SolutionItems) = preProject
@@ -10,7 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{E9E4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0508F31B-5B21-4096-A3B7-280815BBECAE}"
 	ProjectSection(SolutionItems) = preProject
-		Readme.txt = Readme.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiddlerJsonViewer", "Fiddler\FiddlerJsonViewer.csproj", "{4B6A26FA-0D44-4354-92E7-54FC5A75469B}"
