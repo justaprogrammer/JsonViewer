@@ -1,1 +1,8 @@
 _ReSharper*/*
+
+#No VisualStudio local files
+*.suo
+obj/
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
