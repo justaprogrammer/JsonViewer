@@ -2,6 +2,7 @@ _ReSharper*/*
 
 #No VisualStudio local files
 *.suo
+*.user
 obj/
 [Bb]in
 [Dd]ebug*/
