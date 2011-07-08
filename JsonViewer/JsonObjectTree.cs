@@ -84,7 +84,7 @@ namespace EPocalipse.Json.Viewer
                 obj.JsonType = JsonType.Object;
             else
             {
-            	if (typeof(string) == jsonObject.GetType()) {
+            	if (jsonObject is string) {
             		Match match = dateRegex.Match(jsonObject as string);
         			if (match.Success) {
             			// I'm not sure why this is match.Groups[1] and not match.Groups[0]
