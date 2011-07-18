@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{E9E44130-70CC-442C-A77C-A1112310354A}"
 	ProjectSection(SolutionItems) = preProject
 		Samples\GridSample.txt = Samples\GridSample.txt
@@ -17,7 +17,27 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonView", "JsonView\JsonVi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonViewer", "JsonViewer\JsonViewer.csproj", "{3AE264FB-52DC-4295-A37F-CE63CAF54930}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonViewer.Test", "JsonViewer.Test\JsonViewer.Test.csproj", "{352E688F-776F-4A5F-8781-83DBAFE71DEC}"
+EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs03.codeplex.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Fiddler\\FiddlerJsonViewer.csproj
+		SccProjectName1 = Fiddler
+		SccLocalPath1 = Fiddler
+		SccProjectUniqueName2 = JsonView\\JsonView.csproj
+		SccProjectName2 = JsonView
+		SccLocalPath2 = JsonView
+		SccProjectUniqueName3 = JsonViewer\\JsonViewer.csproj
+		SccProjectName3 = JsonViewer
+		SccLocalPath3 = JsonViewer
+		SccProjectUniqueName4 = Visualizer\\JsonVisualizer.csproj
+		SccProjectName4 = Visualizer
+		SccLocalPath4 = Visualizer
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -39,26 +59,12 @@ Global
 		{3AE264FB-52DC-4295-A37F-CE63CAF54930}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AE264FB-52DC-4295-A37F-CE63CAF54930}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AE264FB-52DC-4295-A37F-CE63CAF54930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{352E688F-776F-4A5F-8781-83DBAFE71DEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{352E688F-776F-4A5F-8781-83DBAFE71DEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{352E688F-776F-4A5F-8781-83DBAFE71DEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{352E688F-776F-4A5F-8781-83DBAFE71DEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs03.codeplex.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Fiddler\\FiddlerJsonViewer.csproj
-		SccProjectName1 = Fiddler
-		SccLocalPath1 = Fiddler
-		SccProjectUniqueName2 = JsonView\\JsonView.csproj
-		SccProjectName2 = JsonView
-		SccLocalPath2 = JsonView
-		SccProjectUniqueName3 = JsonViewer\\JsonViewer.csproj
-		SccProjectName3 = JsonViewer
-		SccLocalPath3 = JsonViewer
-		SccProjectUniqueName4 = Visualizer\\JsonVisualizer.csproj
-		SccProjectName4 = Visualizer
-		SccLocalPath4 = Visualizer
 	EndGlobalSection
 EndGlobal
