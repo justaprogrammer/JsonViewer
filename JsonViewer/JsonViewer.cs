@@ -572,11 +572,14 @@ namespace EPocalipse.Json.Viewer
 
         private void btnCopy_Click(object sender, EventArgs e)
         {
-            string text;
-            if (txtJson.SelectionLength > 0)
-                text = txtJson.SelectedText;
-            else
-                text = txtJson.Text;
+            //if (txtJson.SelectionLength < 1 || txtJson.Text == "")
+            //{
+            //    //MessageBox.Show("Error,no data selected.");
+            //    ShowInfo(@"error,there are none any strings.");
+            //    return;
+            //}
+
+            var text = txtJson.SelectionLength > 0 ? txtJson.SelectedText : txtJson.Text;
             Clipboard.SetText(text);
         }
 
@@ -632,6 +635,17 @@ namespace EPocalipse.Json.Viewer
                 text = text.Replace(ch.ToString(), "");
             }
             txtJson.Text = text;
+        }
+
+        private void btnPhpJsonDecode_Click(object sender, EventArgs e)
+        {
+            string text = txtJson.Text;
+            if (!string.IsNullOrEmpty(text))
+            {
+                string str2 = JavaScriptConvert.SerializeObject(PhpSerializer.UnSerialize(Encoding.Default.GetBytes(text), Encoding.Default));
+                this.txtJson.Text = str2;
+            }
+
         }
     }
 
