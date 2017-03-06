@@ -107,7 +107,7 @@ namespace EPocalipse.Json.JsonView
         {
             Control c;
             c = this.JsonViewer.Controls.Find("txtJson", true)[0];
-            ((RichTextBox)c).SelectAll();
+            ((TextBox)c).SelectAll();
         }
 
         /// <summary>
@@ -121,11 +121,11 @@ namespace EPocalipse.Json.JsonView
             Control c;
             c = this.JsonViewer.Controls.Find("txtJson", true)[0];
             string text;
-            if (((RichTextBox)c).SelectionLength > 0)
-                text = ((RichTextBox)c).SelectedText;
+            if (((TextBox)c).SelectionLength > 0)
+                text = ((TextBox)c).SelectedText;
             else
-                text = ((RichTextBox)c).Text;
-            ((RichTextBox)c).SelectedText = "";
+                text = ((TextBox)c).Text;
+            ((TextBox)c).SelectedText = "";
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace EPocalipse.Json.JsonView
         {
             Control c;
             c = this.JsonViewer.Controls.Find("txtJson", true)[0];
-            ((RichTextBox)c).Paste();
+            ((TextBox)c).Paste();
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace EPocalipse.Json.JsonView
         {
             Control c;
             c = this.JsonViewer.Controls.Find("txtJson", true)[0];
-            ((RichTextBox)c).Copy();
+            ((TextBox)c).Copy();
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace EPocalipse.Json.JsonView
         {
             Control c;
             c = this.JsonViewer.Controls.Find("txtJson", true)[0];
-            ((RichTextBox)c).Cut();
+            ((TextBox)c).Cut();
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace EPocalipse.Json.JsonView
         {
             Control c;
             c = this.JsonViewer.Controls.Find("txtJson", true)[0];
-            ((RichTextBox)c).Undo();
+            ((TextBox)c).Undo();
         }
 
         /// <summary>
