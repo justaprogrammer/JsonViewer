@@ -17,9 +17,6 @@ The archive contains the following directories:
 - To use the standalone viewer, run JsonView.exe from \JsonView
 - To use the Fiddler2 plugin, copy the files from the \Fiddler directory to fiddler's \Inspectors 
   directory and add the following to the <runtime> section of the fiddler.exe.config:
-      <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
-      <probing privatePath="Inspectors" />
-    </assemblyBinding>
 - To use the Visual Studio Visualizer, copy the JsonVisualizer.dll to the Visual Studio Visualizers 
   directory (usually under \My Documents\Visual Studio 2005\Visualizers) and copy the following files
   to the IDE directory of Visual Studio (Where devenv.exe is located - <Visual Studio>\Common7\IDE):

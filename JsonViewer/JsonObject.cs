@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.ComponentModel;
 
 namespace EPocalipse.Json.Viewer
 {
-    [DebuggerDisplay("Text = {Text}")]
+    [DebuggerDisplay("Type={GetType().Name} Text = {Text}")]
+    [TypeConverter(typeof(ExpandableObjectConverter))]
     public class JsonObject
     {
+        static JsonObject()
+        {
+            TypeDescriptor.AddProvider(new JsonObjectTypeDescriptionProvider(), typeof(JsonObject));
+        }
+
         private string _id;
         private object _value;
         private JsonType _jsonType;

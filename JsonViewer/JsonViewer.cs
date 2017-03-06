@@ -21,6 +21,7 @@ namespace EPocalipse.Json.Viewer
         private PluginsManager _pluginsManager = new PluginsManager();
         bool _updating;
         Control _lastVisualizerControl;
+        private bool ignoreSelChange;
 
         public JsonViewer()
         {
@@ -130,8 +131,16 @@ namespace EPocalipse.Json.Viewer
 
         private void MarkError(ErrorDetails _errorDetails)
         {
-            txtJson.Select(Math.Max(0, _errorDetails.Position - 1), 10);
-            txtJson.ScrollToCaret();
+            ignoreSelChange = true;
+            try
+            {
+                txtJson.Select(Math.Max(0, _errorDetails.Position - 1), 10);
+                txtJson.ScrollToCaret();
+            }
+            finally
+            {
+                ignoreSelChange = false;
+            }
         }
 
         private void VisualizeJsonTree(JsonObjectTree tree)
@@ -158,6 +167,7 @@ namespace EPocalipse.Json.Viewer
             }
         }
 
+        [Browsable(false)]
         public ErrorDetails ErrorDetails
         {
             get
@@ -193,6 +203,7 @@ namespace EPocalipse.Json.Viewer
             lblError.Text = String.Empty;
         }
 
+        [Browsable(false)]
         public bool HasErrors
         {
             get
@@ -204,6 +215,7 @@ namespace EPocalipse.Json.Viewer
         private void txtJson_TextChanged(object sender, EventArgs e)
         {
             Json = txtJson.Text;
+            btnViewSelected.Checked = false;
         }
 
         private void txtFind_TextChanged(object sender, EventArgs e)
@@ -572,14 +584,11 @@ namespace EPocalipse.Json.Viewer
 
         private void btnCopy_Click(object sender, EventArgs e)
         {
-            //if (txtJson.SelectionLength < 1 || txtJson.Text == "")
-            //{
-            //    //MessageBox.Show("Error,no data selected.");
-            //    ShowInfo(@"error,there are none any strings.");
-            //    return;
-            //}
-
-            var text = txtJson.SelectionLength > 0 ? txtJson.SelectedText : txtJson.Text;
+            string text;
+            if (txtJson.SelectionLength > 0)
+                text = txtJson.SelectedText;
+            else
+                text = txtJson.Text;
             Clipboard.SetText(text);
         }
 
@@ -597,12 +606,33 @@ namespace EPocalipse.Json.Viewer
             }
         }
 
+        private void mnuCopyName_Click(object sender, EventArgs e)
+        {
+            JsonViewerTreeNode node = GetSelectedTreeNode();
+
+            if (node != null && node.JsonObject.Id != null)
+            {
+                JsonObject obj = node.Tag as JsonObject;
+                Clipboard.SetText(obj.Id);
+            }
+            else
+            {
+                Clipboard.SetText("");
+            }
+
+        }
+
         private void mnuCopyValue_Click(object sender, EventArgs e)
         {
             JsonViewerTreeNode node = GetSelectedTreeNode();
-            if (node != null && node.JsonObject.Value != null)
+            if (node != null && node.Tag != null)
             {
-                Clipboard.SetText(node.JsonObject.Value.ToString());
+                JsonObject obj = node.Tag as JsonObject;
+                Clipboard.SetText(obj.Value.ToString());
+            }
+            else
+            {
+                Clipboard.SetText("null");
             }
         }
 
@@ -637,6 +667,24 @@ namespace EPocalipse.Json.Viewer
             txtJson.Text = text;
         }
 
+        private void btnViewSelected_Click(object sender, EventArgs e)
+        {
+            if (btnViewSelected.Checked)
+                _json = txtJson.SelectedText.Trim();
+            else
+                _json = txtJson.Text.Trim();
+            Redraw();
+        }
+
+        private void txtJson_SelectionChanged(object sender, EventArgs e)
+        {
+            if (btnViewSelected.Checked && !ignoreSelChange)
+            {
+                _json = txtJson.SelectedText.Trim();
+                Redraw();
+            }
+        }
+
         private void btnPhpJsonDecode_Click(object sender, EventArgs e)
         {
             string text = txtJson.Text;
@@ -645,7 +693,6 @@ namespace EPocalipse.Json.Viewer
                 string str2 = JavaScriptConvert.SerializeObject(PhpSerializer.UnSerialize(Encoding.Default.GetBytes(text), Encoding.Default));
                 this.txtJson.Text = str2;
             }
-
         }
     }
 

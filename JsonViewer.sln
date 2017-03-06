@@ -1,16 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{E9E44130-70CC-442C-A77C-A1112310354A}"
-	ProjectSection(SolutionItems) = preProject
-		Samples\GridSample.txt = Samples\GridSample.txt
-		Samples\Sample2.txt = Samples\Sample2.txt
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0508F31B-5B21-4096-A3B7-280815BBECAE}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiddlerJsonViewer", "Fiddler\FiddlerJsonViewer.csproj", "{4B6A26FA-0D44-4354-92E7-54FC5A75469B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonVisualizer", "Visualizer\JsonVisualizer.csproj", "{32BEAE8D-282C-4414-9B7F-2F0E9450369A}"
@@ -20,6 +10,31 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonViewer", "JsonViewer\JsonViewer.csproj", "{3AE264FB-52DC-4295-A37F-CE63CAF54930}"
 EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs03
+		SccProjectUniqueName0 = Fiddler\\FiddlerJsonViewer.csproj
+		SccProjectName0 = Fiddler
+		SccAuxPath0 = https://tfs.codeplex.com/tfs/tfs03
+		SccLocalPath0 = Fiddler
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName1 = Visualizer\\JsonVisualizer.csproj
+		SccProjectName1 = Visualizer
+		SccAuxPath1 = https://tfs.codeplex.com/tfs/tfs03
+		SccLocalPath1 = Visualizer
+		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName2 = JsonView\\JsonView.csproj
+		SccProjectName2 = JsonView
+		SccAuxPath2 = https://tfs.codeplex.com/tfs/tfs03
+		SccLocalPath2 = JsonView
+		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName3 = JsonViewer\\JsonViewer.csproj
+		SccProjectName3 = JsonViewer
+		SccAuxPath3 = https://tfs.codeplex.com/tfs/tfs03
+		SccLocalPath3 = JsonViewer
+		SccProvider3 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

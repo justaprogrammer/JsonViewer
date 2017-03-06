@@ -5,7 +5,15 @@ using System.ComponentModel;
 
 namespace EPocalipse.Json.Viewer
 {
-    class JsonTreeObjectTypeDescriptor : ICustomTypeDescriptor
+    class JsonObjectTypeDescriptionProvider : TypeDescriptionProvider
+    {
+        public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
+        {
+            return new JsonTreeObjectTypeDescriptor((JsonObject)instance);
+        }
+    }
+
+    class JsonTreeObjectTypeDescriptor : CustomTypeDescriptor, ICustomTypeDescriptor
     {
         JsonObject _jsonObject;
         PropertyDescriptorCollection _propertyCollection;
@@ -20,57 +28,15 @@ namespace EPocalipse.Json.Viewer
         {
             List<PropertyDescriptor> propertyDescriptors = new List<PropertyDescriptor>();
 
-            foreach (JsonObject field in _jsonObject.Fields)
+            if (_jsonObject != null)
             {
-                PropertyDescriptor pd = new JsonTreeObjectPropertyDescriptor(field);
-                propertyDescriptors.Add(pd);
+                foreach (JsonObject field in _jsonObject.Fields)
+                {
+                    PropertyDescriptor pd = new JsonTreeObjectPropertyDescriptor(field);
+                    propertyDescriptors.Add(pd);
+                }
             }
             _propertyCollection = new PropertyDescriptorCollection(propertyDescriptors.ToArray());
-        }
-
-        AttributeCollection ICustomTypeDescriptor.GetAttributes()
-        {
-            return TypeDescriptor.GetAttributes(_jsonObject, true);
-        }
-
-        string ICustomTypeDescriptor.GetClassName()
-        {
-            return TypeDescriptor.GetClassName(_jsonObject, true);
-        }
-
-        string ICustomTypeDescriptor.GetComponentName()
-        {
-            return TypeDescriptor.GetComponentName(_jsonObject, true);
-        }
-
-        TypeConverter ICustomTypeDescriptor.GetConverter()
-        {
-            return TypeDescriptor.GetConverter(_jsonObject, true);
-        }
-
-        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent()
-        {
-            return TypeDescriptor.GetDefaultEvent(_jsonObject, true);
-        }
-
-        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty()
-        {
-            return null;
-        }
-
-        object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
-        {
-            return TypeDescriptor.GetEditor(_jsonObject, editorBaseType, true);
-        }
-
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes)
-        {
-            return TypeDescriptor.GetEvents(this, attributes, true);
-        }
-
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents()
-        {
-            return TypeDescriptor.GetEvents(_jsonObject, true);
         }
 
         PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
@@ -92,7 +58,7 @@ namespace EPocalipse.Json.Viewer
     class JsonTreeObjectPropertyDescriptor : PropertyDescriptor
     {
         JsonObject _jsonObject;
-        JsonTreeObjectTypeDescriptor[] _jsonObjects;
+        JsonObject[] _jsonObjects;
 
         public JsonTreeObjectPropertyDescriptor(JsonObject jsonObject)
             : base(jsonObject.Id, null)
@@ -104,10 +70,10 @@ namespace EPocalipse.Json.Viewer
 
         private void InitJsonObject()
         {
-            List<JsonTreeObjectTypeDescriptor> jsonObjectList = new List<JsonTreeObjectTypeDescriptor>();
+            List<JsonObject> jsonObjectList = new List<JsonObject>();
             foreach (JsonObject field in _jsonObject.Fields)
             {
-                jsonObjectList.Add(new JsonTreeObjectTypeDescriptor(field));
+                jsonObjectList.Add(field);
             }
             _jsonObjects = jsonObjectList.ToArray();
         }
@@ -130,9 +96,9 @@ namespace EPocalipse.Json.Viewer
             switch (_jsonObject.JsonType)
             {
                 case JsonType.Array:
-                    return _jsonObjects;
+                    return "JsonArray";
                 case JsonType.Object:
-                    return _jsonObject;
+                    return "JsonObject";
                 default:
                     return _jsonObject.Value;
             }
@@ -142,7 +108,9 @@ namespace EPocalipse.Json.Viewer
         {
             get
             {
-                return false;
+                if (_jsonObject.JsonType == JsonType.Value)
+                    return false;
+                return true;
             }
         }
 
@@ -153,9 +121,9 @@ namespace EPocalipse.Json.Viewer
                 switch (_jsonObject.JsonType)
                 {
                     case JsonType.Array:
-                        return typeof(object[]);
+                        return typeof(string);
                     case JsonType.Object:
-                        return typeof(JsonObject);
+                        return typeof(string);
                     default:
                         return _jsonObject.Value == null ? typeof(string) : _jsonObject.Value.GetType();
                 }
