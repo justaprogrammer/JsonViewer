@@ -21,21 +21,7 @@ namespace EPocalipse.Json.Viewer
 
         public void Initialize()
         {
-            try
-            {
-                string myDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                //AppDomain.CurrentDomain.SetupInformation.PrivateBinPath;
-
-                Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
-                if (config == null)
-                    InitDefaults();
-                ViewerConfiguration viewerConfig = (ViewerConfiguration)config.GetSection("jsonViewer");
-                InternalConfig(viewerConfig);
-            }
-            catch
-            {
-                InitDefaults();
-            }
+            InitDefaults();
         }
 
         private void InitDefaults()
@@ -45,30 +31,6 @@ namespace EPocalipse.Json.Viewer
                 AddPlugin(new JsonObjectVisualizer());
                 AddPlugin(new AjaxNetDateTime());
                 AddPlugin(new CustomDate());
-            }
-        }
-
-        private void InternalConfig(ViewerConfiguration viewerConfig)
-        {
-            if (viewerConfig != null)
-            {
-                foreach (KeyValueConfigurationElement keyValue in viewerConfig.Plugins)
-                {
-                    string type = keyValue.Value;
-                    Type pluginType = Type.GetType(type, false);
-                    if (pluginType != null && typeof(IJsonViewerPlugin).IsAssignableFrom(pluginType))
-                    {
-                        try
-                        {
-                            IJsonViewerPlugin plugin = (IJsonViewerPlugin)Activator.CreateInstance(pluginType);
-                            AddPlugin(plugin);
-                        }
-                        catch
-                        {
-                            //Silently ignore any errors in plugin creation
-                        }
-                    }
-                }
             }
         }
 

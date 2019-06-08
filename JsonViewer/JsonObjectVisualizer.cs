@@ -27,7 +27,7 @@ namespace EPocalipse.Json.Viewer
 
         void IJsonVisualizer.Visualize(JsonObject jsonObject)
         {
-            this.pgJsonObject.SelectedObject = new JsonTreeObjectTypeDescriptor(jsonObject);
+            this.pgJsonObject.SelectedObject = jsonObject;
         }
 
 
